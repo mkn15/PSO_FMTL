@@ -1,39 +1,35 @@
+# PSO-FMTL
 
-# Images Folder - Description of Visuals
+This repository contains code for **PSO-FMTL** - a Particle Swarm Optimization-based Federated Multi-Task Learning framework.
 
-This folder contains visual representations of the performance and behavior of the **Partial Sharing Online Federated Multi-Task Learning (PSO-FMTL)** framework for kernel regression.
+## Description
 
-## List of Images
+PSO-FMTL is designed for federated settings where multiple tasks with autoregressive data are learned collaboratively. The approach combines:
 
-### 1. User Performance over Iterations
-- **File:** User graph over iterations.png
-- **Description:** This plot shows the evolution of individual user models over successive iterations. It demonstrates how local models gradually adapt to streaming data and converge to personalized solutions under the PSO-FMTL framework.
+- Feature selection matrix for each task.
+- Regularization techniques.
+- Coordination and uncoordinated variants.
 
-### 2. Heatmap 1 - Task-User Assignment (Efficient Case)
-- **File:** heat map 1.png
-- **Description:** This heatmap visualizes task-to-user assignments, reflecting how workload is distributed among clients. It highlights balanced sharing and efficient adaptation under **Partial Sharing**.
+The code simulates learning and compares RMSE for various settings.
 
-### 3. Heatmap 2 - Task-User Assignment (Less Efficient Case)
-- **File:** heatmap 2.png
-- **Description:** This heatmap represents an alternative scenario, showing uneven task assignments under **less optimized sharing conditions**, illustrating the importance of controlled partial sharing.
+## Folder Structure
 
-### 4. Coordinated Performance Summary (Optional)
-- **File:** coordinated.png
-- **Description:** (Optional - If relevant to your work) This plot can be retained to show overall model convergence under a globally aware coordination framework. Remove if unnecessary.
+- `src/`: Python scripts for training and evaluation.
+- `images/`: Placeholder for output graphs/plots.
+- `README.md`: Project documentation.
+- `LICENSE`: License information.
+- `requirements.txt`: Required Python packages.
 
-### 5. Uncoordinated Performance Summary (Optional)
-- **File:** uncoordinated.png
-- **Description:** (Optional - If relevant to your work) This plot can be retained to show model fluctuations in an uncoordinated update scenario. Remove if unnecessary.
+## How to Use
 
----
+1. Clone this repository.
+2. Install dependencies using `pip install -r requirements.txt`.
+3. Run the Python scripts in `src/` to generate results and plots.
 
-## Notes
+## License
 
-- These images provide supporting evidence for **the effectiveness of the proposed PSO-FMTL framework**.
-- They help illustrate the balance between **communication efficiency** and **model performance across heterogeneous tasks and users**.
+See [LICENSE](LICENSE).
 
----
+## Contact
 
-## Usage
-
-These images can be directly linked in your publications, presentations, or documentation to demonstrate the empirical outcomes of PSO-FMTL.
+For queries, please contact the repository owner.
