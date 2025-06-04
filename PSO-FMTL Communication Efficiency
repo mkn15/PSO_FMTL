@@ -1,0 +1,74 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+def plot_communication_comparison():
+    # System parameters from your code
+    D = 200       # Total model parameters (from training code)
+    M = 35        # Parameters shared in PSO-FMTL (from your _get_fmtl_config)
+    T = 10        # Number of tasks (from generate_multitask_data)
+    rounds = 500  # Training rounds (from _train_model)
+
+    # Head size estimate (assuming task heads are smaller than full model)
+    head_size = 20  # Typical task-specific head size
+
+    # Cost calculations (in number of parameters transmitted)
+    traditional_mtl = rounds * (D + T*head_size)  # Full model + task-specific heads
+    online_fmtl = rounds * D               # Global model only
+    pso_fmtl = rounds * M                  # Only shared parameters
+
+    # Convert to thousands for better display
+    costs = [traditional_mtl/1000, online_fmtl/1000, pso_fmtl/1000]
+    reductions = [
+        0,
+        0,
+        (1 - pso_fmtl/online_fmtl)*100  # PSO-FMTL reduction vs Online-FMTL
+    ]
+
+    # Prepare plot
+    plt.figure(figsize=(10, 6))
+    methods = [
+        'Traditional MTL\n(Full model + task heads)',
+        'Online FMTL\n(Global model only)',
+        'PSO-FMTL\n(M=35 partial sharing)'
+    ]
+    colors = ['#d62728', '#ff7f0e', '#1f77b4']
+
+    # Create bars
+    bars = plt.bar(methods, costs, color=colors, width=0.6,
+                  edgecolor='black', linewidth=1)
+
+    # Annotations
+    for i, (bar, cost, reduction) in enumerate(zip(bars, costs, reductions)):
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2, height + 5,
+                f'{cost:.1f}k params',
+                ha='center', va='bottom', fontsize=10)
+
+        if i == 2:  # Highlight PSO-FMTL savings
+            plt.text(bar.get_x() + bar.get_width()/2, height/2,
+                   f'{reduction:.1f}% reduction\nvs Online-FMTL',
+                   ha='center', va='center', color='white',
+                   fontweight='bold', fontsize=11)
+
+    # Formatting
+    plt.ylabel('Total Communication Cost\n(×1000 parameters)', fontsize=11)
+    plt.title('PSO-FMTL Communication Efficiency (D=200, 10 tasks, 500 rounds)',
+             fontsize=12, pad=20)
+    plt.xticks(fontsize=10)
+    plt.yticks(np.arange(0, max(costs)+30, 25), fontsize=9)
+    plt.grid(axis='y', alpha=0.2)
+    plt.ylim(0, max(costs)+30)
+
+    # Add explanatory note
+    #plt.text(0.5, -0.25,
+           # "Key Insight: PSO-FMTL achieves 82.5% communication reduction by sharing only 35/200 parameters each round\n"
+            #"while matching Online-FMTL accuracy (as shown in learning curves).",
+           # transform=plt.gca().transAxes,
+           # ha='center', va='center',
+            #bbox=dict(facecolor='lightblue', alpha=0.2),
+            #fontsize=10)
+
+    plt.tight_layout()
+    plt.show()
+
+plot_communication_comparison()
