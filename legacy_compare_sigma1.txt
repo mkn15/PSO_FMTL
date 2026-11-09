@@ -1,0 +1,45 @@
+Running 10 seeds x 3 M values, mu=0.05 ...
+  seed 0 done  (1/10, 3s)
+  seed 1 done  (2/10, 5s)
+  seed 2 done  (3/10, 9s)
+  seed 3 done  (4/10, 11s)
+  seed 4 done  (5/10, 14s)
+  seed 5 done  (6/10, 17s)
+  seed 6 done  (7/10, 20s)
+  seed 7 done  (8/10, 23s)
+  seed 8 done  (9/10, 26s)
+  seed 9 done  (10/10, 28s)
+
+==============================================================================
+FINAL MSE (dB, lower is better)  mu=0.05  sigma=1  seeds=10
+==============================================================================
+method                             params/round   MSE (dB)
+FedAvg                                      400     -8.05 +/- 1.92
+PSO-Fed (coordinated, M=1)                    2     -4.99 +/- 1.75
+PSO-FMTL th=1.0 (coordinated, M=1)            2     -4.96 +/- 1.75
+PSO-Fed (coordinated, M=5)                   10     -5.06 +/- 1.75
+PSO-FMTL th=1.0 (coordinated, M=5)           10     -5.03 +/- 1.75
+PSO-Fed (coordinated, M=35)                  70     -5.69 +/- 1.77
+PSO-FMTL th=1.0 (coordinated, M=35)           70     -5.64 +/- 1.77
+PSO-FMTL th=1 (coordinated, M=35)            70     -5.64 +/- 1.77
+------------------------------------------------------------------------------
+PSO-Fed (uncoordinated, M=1)                  2     -5.27 +/- 1.71
+PSO-FMTL th=1.0 (uncoordinated, M=1)            2     -5.39 +/- 1.70
+PSO-Fed (uncoordinated, M=5)                 10     -6.27 +/- 1.67
+PSO-FMTL th=1.0 (uncoordinated, M=5)           10     -6.47 +/- 1.67
+PSO-Fed (uncoordinated, M=35)                70     -8.43 +/- 1.83
+PSO-FMTL th=1.0 (uncoordinated, M=35)           70     -8.49 +/- 1.82
+PSO-FMTL th=1 (uncoordinated, M=35)           70     -8.49 +/- 1.82
+------------------------------------------------------------------------------
+
+PAIRED DIFFERENCES at M = 35 (negative = first method better)
+  PSO-Fed - FedAvg (coordinated)                  +2.36 dB   p=0.00028   better on 0/10 seeds
+  PSO-FMTL(th=1.0) - PSO-Fed (coordinated)        +0.05 dB   p=0.022   better on 1/10 seeds
+  PSO-FMTL(th=1) - PSO-Fed (coordinated)          +0.05 dB   p=0.022   better on 1/10 seeds
+  PSO-Fed - FedAvg (uncoordinated)                -0.38 dB   p=0.048   better on 8/10 seeds
+  PSO-FMTL(th=1.0) - PSO-Fed (uncoordinated)      -0.06 dB   p=0.016   better on 8/10 seeds
+  PSO-FMTL(th=1) - PSO-Fed (uncoordinated)        -0.06 dB   p=0.016   better on 8/10 seeds
+  PSO-Fed uncoordinated - coordinated             -2.74 dB   p=2.6e-05
+  PSO-FMTL uncoordinated - coordinated            -2.85 dB   p=2.3e-05
+
+Saved: fig_coordinated.png, fig_uncoordinated.png, fig_final_mse_bars.png, results.json
